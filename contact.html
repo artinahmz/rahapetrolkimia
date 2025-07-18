@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact – RAHA PETROLKIMIA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.add('light-mode');
+    }
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #1C1C1C;
+      --text: #f1f1f1;
+      --card: #2D2D2D;
+      --accent: #FFA500;
+      --dim: #CCCCCC;
+      --card-border: #FFA500;
+      --hover-red: #B22222;
+    }
+    .light-mode {
+  --bg: #fdf8f3;
+  --text: #2a2a2a;
+  --card: #f5f0ea;
+  --accent: #ff8c00;
+  --dim: #7c7c7c;
+  --border: #cc6a00;
+}
+
+.light-mode .gradient-text {
+  background: linear-gradient(to right, #ff8c00, #cc6a00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.light-mode .emoji {
+  color: inherit;
+}
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: all 0.3s ease;
+    }
+    a { text-decoration: none; color: inherit; }
+    #language-switcher,
+    .toggle-button {
+      position: fixed;
+      right: 20px;
+      z-index: 999;
+      font-weight: bold;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+    .toggle-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  font-size: 0.84em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.toggle-button:hover {
+  background-color: var(--hover-red);
+  color: #fff;
+}
+
+#language-switcher {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  padding: 8px;
+  font-weight: bold;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background-color: var(--card);
+  color: var(--text);
+  z-index: 1000;
+}
+
+    header {
+  background-color: var(--card);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  direction: ltr;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+
+.logo-section img {
+  height: 40px;
+  margin-right: 12px;
+}
+
+.company-title {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: var(--accent);
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+nav a {
+  margin: 0 12px;
+  font-weight: 500;
+  position: relative;
+  color: var(--text);
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--accent);
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--accent);
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+    .hero-contact {
+      text-align: center;
+      padding: 80px 30px 40px;
+      background-color: var(--bg);
+    }
+    .hero-contact h1 {
+      font-size: 2.6em;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .hero-contact p {
+      font-size: 1.1em;
+      color: var(--dim);
+      max-width: 800px;
+      margin: 0 auto;
+      font-weight: 500;
+    }
+
+    .contact-section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    input, textarea {
+      padding: 14px 16px;
+      background-color: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 1em;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--border);
+      outline: none;
+    }
+
+    button {
+      background-color: var(--accent);
+      color: var(--bg);
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: var(--border);
+      color: #fff;
+    }
+
+    .info-card {
+      background-color: var(--card);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 16px rgba(255,165,0,0.25);
+    }
+
+    .info-card h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .info-card p {
+      color: var(--dim);
+      line-height: 1.4;
+    }
+
+    .section {
+      background-color: var(--bg);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 30px 60px;
+      text-align: center;
+    }
+
+    .section h2 {
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .section p {
+      color: var(--dim);
+      line-height: 1.6;
+    }
+
+    footer#footer-note {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      margin: 0;
+      color: #777;
+      text-align: center;
+    }
+
+    header {
+  direction: ltr;
+}
+
+#language-switcher,
+.toggle-button {
+  direction: ltr;
+}
+
+#footer-note {
+  direction: ltr;
+  text-align: left;
+  padding-left: 20px;
+}
+
+#language-switcher option[value="fa"] {
+  direction: rtl;
+  text-align: right;
+}
+
+.ltr {
+  direction: ltr;
+  unicode-bidi: plaintext;
+  display: inline-block;
+}
+
+.container {
+  width: 90%;
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .feature-row {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.section {
+  padding: 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font-size: 16px;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <select id="language-switcher">
+    <option value="en"> English</option>
+    <option value="tr"> Türkçe</option>
+    <option value="fa"> فارسی</option>
+  </select>
+
+  <button class="toggle-button" onclick="toggleTheme()">Toggle Theme</button>
+
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('light-mode');
+      const theme = document.documentElement.classList.contains('light-mode') ? 'light' : 'dark';
+      localStorage.setItem('theme', theme);
+    }
+  </script>
+
+  <header>
+    <div class="logo-section">
+      <img src="assets/LOGO.png" alt="RAHA PETROLKIMIA Logo">
+      <h2 class="company-title">RAHA PETROLKIMIA</h2>
+    </div>
+    <nav>
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="trading.html" class="nav-link">Trading</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero-contact">
+    <h1 id="hero-title"></h1>
+    <p id="hero-sub"></p>
+  </section>
+
+  <section class="contact-section">
+    <form action="https://formsubmit.co/artinahmz@gmail.com" method="POST">
+      <input id="form-name" type="text" name="name" required>
+      <input id="form-email" type="email" name="email" required>
+      <textarea id="form-message" name="message" rows="6" required></textarea>
+      <button id="form-button" type="submit"></button>
+            <input type="hidden" name="_captcha" value="false">
+    </form>
+
+    <div class="info-card">
+      <h3 id="info1-title"></h3>
+      <p id="info1-text"></p>
+    </div>
+
+    <div class="info-card">
+      <h3 id="info2-title"></h3>
+      <p id="info2-text"></p>
+    </div>
+
+    <div class="info-card">
+      <h3 id="info3-title"></h3>
+      <p id="info3-text"></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 id="why-heading"></h2>
+    <p id="why-text"></p>
+    <p id="corridor-text"></p>
+  </section>
+
+  <footer id="footer-note"></footer>
+
+  <script>
+    const translations = {
+      en: {
+        heroTitle: "Get in Touch",
+        heroSub: "Whether you're a supplier, partner, or client, we're here to connect.",
+        formName: "Your Name",
+        formEmail: "Your Email",
+        formMessage: "Your Message",
+        formButton: "Send Message",
+        info1Title: "Central Office",
+        info1Text: "RAHA PETROLKIMIA HQ<br>Tabriz, Iran<br>Energy Gateway to Eurasia",
+        info2Title: "Phone",
+        info2Text: "+98 912 345 6789<br>Mon–Fri, 9am–6pm",
+        info3Title: "Email",
+        info3Text: "info@rahapetrolkimia.com<br>We respond within 24 hours.",
+        whyHeading: "Why Contact Us?",
+        whyText: "We believe in transparency, speed, and strategic collaboration. Whether you're looking to trade, partner, or inquire, our team is ready.",
+        corridorText: "📍 Located on the North–South Corridor, we connect energy markets from Russia to India.",
+        footerNote: "&copy; 2025 RAHA PETROLKIMIA. All rights reserved."
+      },
+      tr: {
+        heroTitle: "İletişime Geçin",
+        heroSub: "Tedarikçi, ortak veya müşteri olun — bizimle bağlantı kurun.",
+        formName: "Adınız",
+        formEmail: "E-posta Adresiniz",
+        formMessage: "Mesajınız",
+        formButton: "Mesaj Gönder",
+        info1Title: "Merkez Ofis",
+        info1Text: "RAHA PETROLKIMIA Genel Merkezi<br>Tabriz, İran<br>Avrasya'nın Enerji Kapısı",
+        info2Title: "Telefon",
+        info2Text: "<span class='ltr'>+98 912 345 6789</span><br>شنبه تا پنج‌شنبه، <span class='ltr'>9 18 تا</span>",
+        info3Title: "E-posta",
+        info3Text: "info@rahapetrolkimia.com<br>24 saat içinde yanıt veriyoruz.",
+        whyHeading: "Neden Bizimle İletişime Geçmelisiniz?",
+        whyText: "Şeffaflık, hız ve stratejik iş birliğine inanıyoruz. Ticaret, ortaklık veya bilgi için ekibimiz hazır.",
+        corridorText: "📍 Kuzey–Güney Koridoru üzerinde yer alıyoruz — Rusya'dan Hindistan'a enerji pazarlarını bağlıyoruz.",
+        footerNote: "&copy; 2025 RAHA PETROLKIMIA. Tüm hakları saklıdır."
+      },
+      fa: {
+        heroTitle: "تماس با ما",
+        heroSub: "چه تأمین‌کننده باشید، چه شریک یا مشتری — ما آماده ارتباط هستیم",
+        formName: "نام شما",
+        formEmail: "ایمیل شما",
+        formMessage: "پیام شما",
+        formButton: "ارسال پیام",
+        info1Title: "دفتر مرکزی",
+        info1Text: "دفتر مرکزی رها پترول کیمیا<br>تبریز، ایران<br>دروازه انرژی اوراسیا",
+        info2Title: "تلفن",
+        info2Text: "<span class='ltr'>+98 912 345 6789</span><br>شنبه تا پنج‌شنبه، <span class='ltr'>9 تا 18</span>",
+        info3Title: "ایمیل",
+        info3Text: "info@rahapetrolkimia.com<br>در کمتر از ۲۴ ساعت پاسخ می‌دهیم",
+        whyHeading: "چرا با ما تماس بگیرید؟",
+        whyText: "ما به شفافیت، سرعت و همکاری راهبردی باور داریم برای تجارت، مشارکت یا پرسش، تیم ما آماده است",
+        corridorText: " 📍در کریدور شمال–جنوب واقع شده‌ایم — اتصال بازارهای انرژی از روسیه تا هند",
+        footerNote: "&copy; 2025 رها پترول کیمیا. همه حقوق محفوظ است"
+      }
+    };
+
+    function updateContact(lang) {
+      const t = translations[lang];
+      if (!t) return;
+
+      document.documentElement.setAttribute("lang", lang);
+      document.documentElement.setAttribute("dir", lang === "fa" ? "rtl" : "ltr");
+      document.getElementById("language-switcher").value = lang;
+      document.getElementById("hero-title").textContent = t.heroTitle;
+      document.getElementById("hero-sub").textContent = t.heroSub;
+      document.getElementById("form-name").placeholder = t.formName;
+      document.getElementById("form-email").placeholder = t.formEmail;
+      document.getElementById("form-message").placeholder = t.formMessage;
+      document.getElementById("form-button").textContent = t.formButton;
+      document.getElementById("info1-title").textContent = t.info1Title;
+      document.getElementById("info1-text").innerHTML = t.info1Text;
+      document.getElementById("info2-title").textContent = t.info2Title;
+      document.getElementById("info2-text").innerHTML = t.info2Text;
+      document.getElementById("info3-title").textContent = t.info3Title;
+      document.getElementById("info3-text").innerHTML = t.info3Text;
+      document.getElementById("why-heading").textContent = t.whyHeading;
+      document.getElementById("why-text").textContent = t.whyText;
+      document.getElementById("corridor-text").textContent = t.corridorText;
+      document.getElementById("footer-note").innerHTML = t.footerNote;
+    }
+
+    const savedLang = localStorage.getItem("language") || "en";
+    updateContact(savedLang);
+
+    document.getElementById("language-switcher").addEventListener("change", function () {
+      const selectedLang = this.value;
+      localStorage.setItem("language", selectedLang);
+      updateContact(selectedLang);
+    });
+  </script>
+</body>
+</html>

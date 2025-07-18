@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About Us – RAHA PETROLKIMIA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.add('light-mode');
+    }
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #1C1C1C;
+      --text: #f1f1f1;
+      --card: #2D2D2D;
+      --accent: #FFA500;
+      --dim: #CCCCCC;
+      --border: #B22222;
+    }
+    .light-mode {
+  --bg: #fdf8f3;
+  --text: #2a2a2a;
+  --card: #f5f0ea;
+  --accent: #ff8c00;
+  --dim: #7c7c7c;
+  --border: #cc6a00;
+}
+
+.light-mode .gradient-text {
+  background: linear-gradient(to right, #ff8c00, #cc6a00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.light-mode .emoji {
+  color: inherit;
+}
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      transition: all 0.3s ease;
+    }
+    a { text-decoration: none; color: inherit; }
+    #language-switcher,
+    .toggle-button {
+      position: fixed;
+      right: 20px;
+      z-index: 999;
+      font-weight: bold;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+    .toggle-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+#language-switcher {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  padding: 8px;
+  font-weight: bold;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background-color: var(--card);
+  color: var(--text);
+  z-index: 1000;
+}
+    .toggle-button:hover {
+      background-color: var(--border);
+      color: #fff;
+    }
+    header {
+      background-color: var(--card);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 8px rgba(255,165,0,0.1);
+    }
+    .logo-section {
+      display: flex;
+      align-items: center;
+    }
+    .logo-section img {
+      height: 40px;
+      margin-right: 12px;
+    }
+    .company-title {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: var(--accent);
+      margin: 0;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    nav a {
+      margin: 0 12px;
+      color: var(--text);
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: var(--accent);
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    .nav-link.active {
+      color: var(--accent);
+      font-weight: bold;
+    }
+    .section {
+      padding: 60px 20px;
+      background-color: var(--card);
+      border-bottom: 1px solid #444;
+      max-width: 1200px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .intro {
+      text-align: center;
+      font-size: 1.1em;
+      color: var(--dim);
+      max-width: 800px;
+      margin: 0 auto 50px;
+    }
+    .about-body {
+      text-align: center;
+      font-size: 1.05em;
+      color: var(--dim);
+      max-width: 900px;
+      line-height: 1.6;
+      margin: 0 auto 50px;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      justify-content: center;
+    }
+    .team-card {
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .team-name {
+      font-size: 1.3em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .team-role {
+      font-size: 1em;
+      color: var(--border);
+      margin-bottom: 12px;
+    }
+    .team-bio {
+      font-size: 0.95em;
+      color: var(--dim);
+    }
+    .footer-note {
+      font-size: 0.9em;
+      color: var(--dim);
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    header {
+  direction: ltr;
+}
+
+.container {
+  width: 90%;
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .feature-row {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.section {
+  padding: 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  font-size: 16px;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <select id="language-switcher">
+    <option value="en"> English</option>
+    <option value="tr"> Türkçe</option>
+    <option value="fa"> فارسی</option>
+  </select>
+
+  <button class="toggle-button" onclick="toggleTheme()">Toggle Theme</button>
+  <script>
+    function toggleTheme() {
+      document.documentElement.classList.toggle('light-mode');
+      const theme = document.documentElement.classList.contains('light-mode') ? 'light' : 'dark';
+      localStorage.setItem('theme', theme);
+    }
+  </script>
+
+  <header>
+    <div class="logo-section">
+      <img src="assets/LOGO.png" alt="RAHA PETROLKIMIA Logo">
+      <h2 class="company-title">RAHA PETROLKIMIA</h2>
+    </div>
+    <nav>
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="trading.html" class="nav-link">Trading</a>
+      <a href="about.html" class="nav-link active">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <section class="section">
+    <h1 id="about-title"></h1>
+    <p class="intro" id="intro-text"></p>
+    <div class="about-body" id="body-text"></div>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-name" id="team-name-1"></div>
+        <div class="team-role" id="team-role-1"></div>
+        <p class="team-bio" id="team-bio-1"></p>
+      </div>
+      <div class="team-card">
+        <div class="team-name" id="team-name-2"></div>
+        <div class="team-role" id="team-role-2"></div>
+        <p class="team-bio" id="team-bio-2"></p>
+      </div>
+    </div>
+
+    <p class="footer-note" id="footer-note"></p>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const aboutLang = {
+        en: {
+          aboutTitle: "About RAHA PETROLKIMIA",
+          introText: "RAHA PETROLKIMIA is a vertically integrated petroleum product company headquartered in Iran, with operations spanning the UAE and beyond. We specialize in high-quality bitumen, base oils, paraffin wax, petroleum jelly, and petrochemical derivatives.",
+          bodyText: [
+            "Founded to bring transparency and efficiency to global energy markets, we serve over 140 countries across Europe, Asia, Africa, and the Middle East.",
+            "We partner with refiners, logistics providers, and research institutes to deliver consistent product quality, navigate regulations, and advise on pricing and procurement.",
+            "Sustainability is our standard: we invest in cleaner production, smart inventory systems, and digital tools that lower carbon footprints and elevate commercial performance."
+          ],
+          team: [
+            {
+              name: "Peyman Zivari",
+              role: "Lead Stakeholder & Market Strategist",
+              bio: "Peyman brings years of global-market experience. His leadership drives operational excellence and a future-forward petrochemical portfolio."
+            },
+            {
+              name: "Artin Ahmadzadeh",
+                            role: "Technical Director, IT & Web Infrastructure",
+              bio: "The digital heartbeat of RAHA PETROLKIMIA, Artin oversees secure data architecture and public-facing platforms—ensuring everything hums smoothly."
+            }
+          ],
+          footer: "We don’t just trade petroleum—we build partnerships. Interested in working with us? Reach out for collaborations, technical support, or strategic ventures."
+        },
+
+        tr: {
+          aboutTitle: "RAHA PETROLKIMIA Hakkında",
+          introText: "RAHA PETROLKIMIA, merkezi İran’da bulunan ve BAE'de faaliyet gösteren entegre bir petrol ürünleri şirketidir. Yüksek kaliteli bitüm, baz yağlar, parafin mumu, petrol jeli ve petrokimya türevlerinde uzmanız.",
+          bodyText: [
+            "Küresel enerji piyasalarına şeffaflık ve verimlilik getirmek amacıyla kurulan şirketimiz, Avrupa, Asya, Afrika ve Orta Doğu'da 140'tan fazla ülkeye hizmet vermektedir.",
+            "Rafineriler, lojistik sağlayıcılar ve araştırma enstitüleriyle ortaklık kurarak sürekli kalite sunuyor, düzenlemelere uyuyor ve fiyatlandırma konularında danışmanlık yapıyoruz.",
+            "Sürdürülebilirlik bizim için standarttır: daha temiz üretim, akıllı envanter sistemleri ve karbon ayak izini azaltan dijital araçlara yatırım yapıyoruz."
+          ],
+          team: [
+            {
+              name: "Peyman Zivari",
+              role: "Baş Yatırımcı ve Pazar Stratejisti",
+              bio: "Peyman, uluslararası pazarlarda yılların deneyimine sahip. Liderliği operasyonel mükemmellik ve gelecek odaklı bir petrokimya portföyü sağlıyor."
+            },
+            {
+              name: "Artin Ahmadzadeh",
+              role: "Teknik Direktör, BT & Web Altyapısı",
+              bio: "RAHA PETROLKIMIA'nın dijital kalbi olan Artin, veri güvenliği altyapısını ve tüm dijital platformları yönetir."
+            }
+          ],
+          footer: "Sadece petrol ticareti yapmıyoruz—güçlü ortaklıklar kuruyoruz. İş birliği, teknik destek veya stratejik projeler için bizimle iletişime geçin."
+        },
+
+        fa: {
+          aboutTitle: "درباره رها پترول کیمیا",
+          introText: "رها پترول کیمیا یک شرکت یکپارچه محصولات نفتی با مرکزیت ایران و فعالیت در امارات متحده عربی است ما در زمینه بیتومن، روغن پایه، واکس پارافین، ژل نفتی و مشتقات پتروشیمی باکیفیت تخصص داریم",
+          bodyText: [
+            "برای ایجاد شفافیت و بهره‌وری در بازارهای جهانی انرژی تأسیس شدیم و به بیش از ۱۴۰ کشور در اروپا، آسیا، آفریقا و خاورمیانه خدمت می‌کنی",
+            "با پالایشگاه‌ها، شرکت‌های لجستیکی و مؤسسات تحقیقاتی همکاری می‌کنیم تا کیفیت پایدار ارائه دهیم، مقررات را رعایت کنیم و در زمینه قیمت‌گذاری مشاوره دهیم",
+            "پایداری برای ما یک اصل است: در روش‌های تولید پاک‌تر، سیستم‌های هوشمند انبارداری و ابزارهای دیجیتال سرمایه‌گذاری می‌کنیم تا ردپای کربن را کاهش داده و عملکرد تجاری را ارتقا دهیم"
+          ],
+          team: [
+            {
+              name: "پیمان زیوری",
+              role: "سرمایه‌گذار ارشد و استراتژیست بازار",
+              bio: "پیمان با سال‌ها تجربه در بازارهای جهانی، هدایت‌گر عملیات کارآمد و توسعه سبد پتروشیمی آینده‌نگر است"
+            },
+            {
+              name: "آرتین احمدزاده",
+              role: "مدیر فنی، فناوری اطلاعات و زیرساخت وب",
+              bio: "قلب دیجیتال رها پترول کیمیا، آرتین مسئول امنیت داده‌ها و پلتفرم‌هایی است که تجربه‌ای روان و بی‌نقص ارائه می‌دهند"
+            }
+          ],
+          footer: "ما فقط نفت معامله نمی‌کنیم — بلکه روابط پایدار ایجاد می‌کنیم برای همکاری، پشتیبانی فنی یا پروژه‌های راهبردی با ما تماس بگیرید"
+        }
+      };
+
+      function updateLanguage(lang) {
+        const t = aboutLang[lang];
+        if (!t) return;
+
+        document.documentElement.setAttribute("lang", lang);
+        document.documentElement.setAttribute("dir", lang === "fa" ? "rtl" : "ltr");
+        document.getElementById("language-switcher").value = lang;
+        document.getElementById("about-title").textContent = t.aboutTitle;
+        document.getElementById("intro-text").textContent = t.introText;
+        const body = document.getElementById("body-text");
+        body.innerHTML = "";
+        t.bodyText.forEach(par => {
+          const p = document.createElement("p");
+          p.textContent = par;
+          body.appendChild(p);
+        });
+        t.team.forEach((member, i) => {
+          document.getElementById(`team-name-${i + 1}`).textContent = member.name;
+          document.getElementById(`team-role-${i + 1}`).textContent = member.role;
+          document.getElementById(`team-bio-${i + 1}`).textContent = member.bio;
+        });
+        document.getElementById("footer-note").textContent = t.footer;
+      }
+
+      const savedLang = localStorage.getItem("language") || "en";
+      document.getElementById("language-switcher").value = savedLang;
+      updateLanguage(savedLang);
+
+      document.getElementById("language-switcher").addEventListener("change", e => {
+        const lang = e.target.value;
+        localStorage.setItem("language", lang);
+        updateLanguage(lang);
+      });
+    });
+  </script>
+
+</body>
+</html>
