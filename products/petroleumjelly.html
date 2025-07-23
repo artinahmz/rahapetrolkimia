@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Petroleum Jelly – RAHA PETROLKIMIA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.add('light-mode');
+    }
+  </script>
+  <style>
+:root {
+  --bg: #121212;
+  --text: #e0e0e0;
+  --card: #1f1f1f;
+  --accent: #ff9900;
+  --dim: #aaa;
+  --border: #cc5c00;
+}
+.light-mode {
+  --bg: #ffffff;
+  --text: #2c2c2c;
+  --card: #fff3f0;
+  --accent: #d93425;
+  --dim: #777;
+  --border: #bf2c1a;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+main { flex: 1; }
+a { text-decoration: none; color: inherit; }
+
+header {
+  background: var(--card);
+  padding: 16px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(255,165,0,0.1);
+}
+.logo-section {
+  display: flex;
+  align-items: center;
+}
+.logo-section img {
+  height: 40px;
+  margin-right: 12px;
+}
+.company-title {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+#language-switcher, .toggle-button {
+  position: fixed;
+  right: 20px;
+  z-index: 999;
+  font-weight: bold;
+  border-radius: 6px;
+}
+#language-switcher {
+  bottom: 70px;
+  padding: 8px;
+  background: var(--card);
+  border: 1px solid var(--accent);
+  color: var(--text);
+}
+.toggle-button {
+  bottom: 20px;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.product-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 30px;
+}
+.back-link {
+  display: block;
+  margin: 30px;
+  font-weight: bold;
+  color: var(--accent);
+}
+.product-title {
+  font-size: 2.6em;
+  background: linear-gradient(to right, var(--accent), var(--border));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-bottom: 24px;
+}
+.product-description {
+  font-size: 1.2em;
+  color: var(--text);
+  text-align: center;
+  max-width: 900px;
+  margin: auto;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+.product-images {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.product-images img {
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.price-section {
+  background: var(--card);
+  padding: 30px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  max-width: 600px;
+  margin: auto;
+}
+.price-section h2 {
+  font-size: 1.8em;
+  color: var(--accent);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.price-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.price-table td.label {
+  font-weight: bold;
+  color: var(--accent);
+  width: 40%;
+}
+.price-input {
+  width: 100px;
+  padding: 6px;
+  font-size: 1em;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+}
+
+footer.super-footer {
+  background: var(--card);
+  padding: 60px 30px 30px;
+  color: var(--text);
+  border-top: 2px solid var(--accent);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+.footer-column h4 {
+  font-size: 1.2em;
+  margin-bottom: 16px;
+  color: var(--accent);
+}
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-column ul li::before {
+  content: "➤ ";
+  color: var(--accent);
+}
+.cert-pill {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin: 4px 10px 4px 0;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+.social-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+.social-icons img {
+  height: 24px;
+  filter: grayscale(1);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.social-icons img:hover {
+  filter: none;
+  transform: scale(1.2);
+}
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.85em;
+  color: var(--dim);
+}
+header {
+  direction: ltr; /* Lock the layout direction */
+}
+</style>
+</head>
+<body>
+  <select id="language-switcher">
+    <option value="en">English</option>
+    <option value="fa">فارسی</option>
+    <option value="tr">Türkçe</option>
+  </select>
+  <button class="toggle-button" onclick="toggleTheme()">Toggle Theme</button>
+
+  <header>
+    <div class="logo-section">
+      <img src="assets/LOGO.png" alt="RAHA Logo" />
+      <h2 class="company-title">RAHA PETROLKIMIA</h2>
+    </div>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link" id="back-link">← Back to Home</a>
+
+    <div class="product-container">
+      <h1 class="product-title" id="product-title"></h1>
+      <p class="product-description" id="product-desc"></p>
+
+      <div class="product-images">
+        <img src="assets/jelly11.webp" alt="Petroleum Jelly sample 1" />
+        <img src="assets/jelly33.avif" alt="Petroleum Jelly sample 2" />
+        <img src="assets/jelly22.webp" alt="Petroleum Jelly application" />
+      </div>
+
+      <div class="product-description" id="product-specs"></div>
+
+      <div class="price-section">
+        <h2 id="price-title"></h2>
+        <table class="price-table">
+          <tr>
+            <td class="label" id="current-price-label"></td>
+            <td><input type="number" id="currentPrice" value="890" class="price-input" readonly /> USD/MT</td>
+          </tr>
+          <tr>
+            <td class="label" id="monthly-change-label"></td>
+            <td id="monthlyChange">+3.9%</td>
+          </tr>
+          <tr>
+            <td class="label" id="yearly-change-label"></td>
+            <td id="yearlyChange">+6.2%</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer class="super-footer">
+    <div class="footer-grid">
+      <div class="footer-column">
+        <h4 id="footer-location-title"></h4>
+        <p>🇹🇷 <strong>Ankara HQ:</strong> Altinoran Complex, Tower 3</p>
+        <p>🇦🇪 <strong>Dubai Regional:</strong> Burlington Tower, Business Bay</p>
+      </div>
+      <div class="footer-column">
+        <h4 id="footer-services-title"></h4>
+        <ul id="footer-services-list"></ul>
+      </div>
+      <div class="footer-column">
+        <h4 id="footer-cert-title"></h4>
+        <span class="cert-pill">ISO 9001</span>
+        <span class="cert-pill">SGS Certified</span>
+      </div>
+      <div class="footer-column">
+        <h4 id="footer-contact-title"></h4>
+        <p><a href="mailto:info@rahapetrolkimia.com">info@rahapetrolkimia.com</a></p>
+        <p><span></span> <span dir="ltr">+90 552 693 15 10</span></p>
+        <div class="social-icons">
+          <a href="#"><img src="assets/linkedin.svg" alt="LinkedIn" /></a>
+          <a href="#"><img src="assets/twitter.svg" alt="Twitter" /></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p id="footer-final-note"></p>
+    </div>
+  </footer>
+
+  <script>
+const translations = {
+  en: {
+    productTitle: "Petroleum Jelly",
+    productDesc: "Petroleum Jelly is a semi-solid mixture of hydrocarbons, widely used in cosmetic, pharmaceutical, and industrial applications. Its purity, moisture resistance, and soothing properties make it a versatile base material.",
+    productSpecs: `
+      <p>Grade: Cosmetic or Industrial</p>
+      <p>Melting Point: 38–60°C — varies by grade</p>
+      <p>Color: White to yellow</p>
+      <p>Penetration: 130–230 (ASTM D937)</p>
+      <p>Odor: Odorless or mild scent</p>
+      <p>Applications: Skincare, lubricants, anti-corrosion coatings, pharmaceuticals, leather treatments</p>
+    `,
+    priceTitle: "Pricing & Trends",
+    currentPriceLabel: "Current Price",
+    monthlyChangeLabel: "Change (30 days)",
+    yearlyChangeLabel: "Change (12 months)",
+    backLink: "← Back to Home",
+    footerLocationTitle: "Our Offices",
+    footerServicesTitle: "Services Offered",
+    footerCertTitle: "Certified",
+    footerContactTitle: "Get in Touch",
+    footerFinalNote: "© 2025 RAHA PETROLKIMIA. Trusted Petroleum Supply & Strategy.",
+    footerServicesList: [
+      "Engineering & Setup",
+      "Documentation & SDS",
+      "Regulatory Compliance",
+      "Logistics Planning"
+    ]
+  },
+  fa: {
+    productTitle: "وازلین (پترولیوم ژله)",
+    productDesc: "وازلین مخلوطی نیمه‌جامد از هیدروکربن‌ها است که به‌طور گسترده در صنایع آرایشی، دارویی و صنعتی مورد استفاده قرار می‌گیرد. خلوص بالا، مقاومت در برابر رطوبت و خاصیت آرام‌بخشی آن را به ماده‌ای چندمنظوره تبدیل کرده است.",
+    productSpecs: `
+      <p>نوع: آرایشی یا صنعتی</p>
+      <p>نقطه ذوب: ۳۸ تا ۶۰ درجه سانتی‌گراد — بسته به نوع</p>
+      <p>رنگ: سفید تا زرد</p>
+      <p>نفوذپذیری: ۱۳۰ تا ۲۳۰ (استاندارد ASTM D937)</p>
+      <p>بو: بدون بو یا دارای رایحه ملایم</p>
+      <p>کاربردها: مراقبت از پوست، روان‌کننده‌ها، پوشش ضدزنگ، داروسازی، فرآوری چرم</p>
+    `,
+    priceTitle: "قیمت و روندها",
+    currentPriceLabel: "قیمت فعلی",
+    monthlyChangeLabel: "تغییر (۳۰ روز)",
+    yearlyChangeLabel: "تغییر (۱۲ ماه)",
+    backLink: "← بازگشت به صفحه اصلی",
+    footerLocationTitle: "دفاتر ما",
+    footerServicesTitle: "خدمات ارائه‌شده",
+    footerCertTitle: "دارای گواهینامه",
+    footerContactTitle: "ارتباط با ما",
+    footerFinalNote: "© ۲۰۲۵ رها پترول کیمیا. تأمین مطمئن و استراتژی نفتی.",
+    footerServicesList: [
+      "مهندسی و راه‌اندازی",
+      "مدارک فنی و SDS",
+      "انطباق با مقررات",
+      "برنامه‌ریزی لجستیک"
+    ]
+  },
+  tr: {
+    productTitle: "Petrol Jeli",
+    productDesc: "Petrol jeli, kozmetik, ilaç ve endüstriyel uygulamalarda yaygın olarak kullanılan yarı katı hidrokarbon karışımıdır. Saflığı, nem direnci ve yatıştırıcı özellikleri ile çok yönlü bir temel malzemedir.",
+    productSpecs: `
+      <p>Kalite: Kozmetik veya Endüstriyel</p>
+      <p>Erime Noktası: 38–60°C — kaliteye göre değişir</p>
+      <p>Renk: Beyazdan sarıya</p>
+      <p>Penetrasyon: 130–230 (ASTM D937)</p>
+      <p>Koku: Kokusu yok veya hafif</p>
+      <p>Kullanım Alanları: Cilt bakımı, yağlayıcılar, pas önleyici kaplamalar, ilaç sektörü, deri işlemleri</p>
+    `,
+    priceTitle: "Fiyatlandırma ve Eğilimler",
+    currentPriceLabel: "Güncel Fiyat",
+    monthlyChangeLabel: "Değişim (30 gün)",
+    yearlyChangeLabel: "Değişim (12 ay)",
+    backLink: "← Ana Sayfaya Dön",
+    footerLocationTitle: "Ofislerimiz",
+    footerServicesTitle: "Sunulan Hizmetler",
+    footerCertTitle: "Sertifikalı",
+    footerContactTitle: "İletişim",
+    footerFinalNote: "© 2025 RAHA PETROLKIMIA. Güvenilir Petrol Tedariki ve Strateji.",
+    footerServicesList: [
+      "Mühendislik ve Kurulum",
+      "Belgeler ve SDS",
+      "Yasal Uyum",
+      "Lojistik Planlama"
+    ]
+  }
+};
+
+function applyTranslations(lang) {
+  const t = translations[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
+
+  document.getElementById("product-title").textContent = t.productTitle;
+  document.getElementById("product-desc").textContent = t.productDesc;
+  document.getElementById("product-specs").innerHTML = t.productSpecs;
+  document.getElementById("price-title").textContent = t.priceTitle;
+  document.getElementById("current-price-label").textContent = t.currentPriceLabel;
+  document.getElementById("monthly-change-label").textContent = t.monthlyChangeLabel;
+  document.getElementById("yearly-change-label").textContent = t.yearlyChangeLabel;
+  document.getElementById("back-link").textContent = t.backLink;
+  document.getElementById("footer-location-title").textContent = t.footerLocationTitle;
+  document.getElementById("footer-services-title").textContent = t.footerServicesTitle;
+  document.getElementById("footer-cert-title").textContent = t.footerCertTitle;
+  document.getElementById("footer-contact-title").textContent = t.footerContactTitle;
+  document.getElementById("footer-final-note").textContent = t.footerFinalNote;
+
+  const list = document.getElementById("footer-services-list");
+  list.innerHTML = "";
+  t.footerServicesList.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    list.appendChild(li);
+  });
+}
+
+function toggleTheme() {
+  const isLight = document.documentElement.classList.toggle('light-mode');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const lang = localStorage.getItem("language") || "en";
+  document.getElementById("language-switcher").value = lang;
+  applyTranslations(lang);
+
+  document.getElementById("language-switcher").addEventListener("change", e => {
+    const newLang = e.target.value;
+    localStorage.setItem("language", newLang);
+    applyTranslations(newLang);
+  });
+
+  const priceInput = document.getElementById("currentPrice");
+  const monthlyChange = document.getElementById("monthlyChange");
+  const yearlyChange = document.getElementById("yearlyChange");
+
+  const base = 890;
+  const current = parseFloat(priceInput.value);
+  const monthDiff = ((current - base) / base * 100).toFixed(1);
+  const yearDiff = ((current - 838) / 838 * 100).toFixed(1);
+  monthlyChange.textContent = `${monthDiff > 0 ? '+' : ''}${monthDiff}%`;
+  yearlyChange.textContent = `${yearDiff > 0 ? '+' : ''}${yearDiff}%`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Services – RAHA PETROLKIMIA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    // Apply saved theme on load
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.add('light-mode');
+    }
+  </script>
+  <style>
+    /* Color & spacing variables */
+    :root {
+      --bg: #121212;
+      --text: #f1f1f1;
+      --card: #1f1f1f;
+      --accent: #ff9900;
+      --dim: #999;
+      --border: #cc5c00;
+    }
+    .light-mode {
+      --bg: #ffffff;
+      --text: #2c2c2c;
+      --card: #fff3f0;
+      --accent: #d93425;
+      --dim: #777;
+      --border: #bf2c1a;
+    }
+
+    /* Reset & base */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
+    main { flex: 1; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Header & nav */
+    header {
+      background: var(--card);
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-section {
+      display: flex; align-items: center;
+    }
+    .logo-section img {
+      height: 40px; margin-right: 12px;
+    }
+    .company-title {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: var(--accent);
+    }
+    nav {
+      display: flex;
+      gap: 18px;
+    }
+    nav a {
+      position: relative;
+      font-weight: 500;
+      padding-bottom: 4px;
+      transition: color 0.3s ease;
+      color: var(--text);
+    }
+    nav a:hover,
+    nav a.active {
+      color: var(--accent);
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+
+    /* Language & theme toggles */
+    #language-switcher, .toggle-button {
+      position: fixed; right: 20px; z-index: 1000;
+      font-weight: bold; border-radius: 6px;
+    }
+    #language-switcher {
+      bottom: 70px;
+      padding: 8px;
+      background: var(--card);
+      border: 1px solid var(--accent);
+      color: var(--text);
+    }
+    .toggle-button {
+      bottom: 20px;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 10px 16px;
+      cursor: pointer;
+    }
+
+    /* Intro */
+    .big-intro {
+      text-align: center;
+      padding: 40px 20px 0;
+    }
+    .big-intro img {
+      width: 100%;
+      max-width: 1200px;
+      border-radius: 12px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+      margin-bottom: 40px;
+    }
+    .big-intro h2 {
+      font-size: 2.4em;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, var(--accent), var(--border));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .big-intro p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.1em;
+      color: var(--dim);
+      line-height: 1.6;
+    }
+
+    /* Services grid */
+    .section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .section h2 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 40px;
+      background: linear-gradient(to right, var(--accent), var(--border));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .service-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      gap: 30px;
+    }
+    .service-card {
+      flex: 1 1 260px;
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--card);
+      border-left: 6px solid var(--accent);
+      border-radius: 12px;
+      padding: 24px;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .service-card:hover {
+      box-shadow: 0 4px 12px rgba(255,165,0,0.15);
+    }
+    .service-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.2em;
+      color: var(--accent);
+    }
+    .service-card p {
+      margin: 0;
+      font-size: 0.95em;
+      color: var(--dim);
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    /* Modal overlay */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+    }
+    .modal-content {
+      background: var(--card);
+      padding: 40px;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 90%;
+      position: relative;
+      color: var(--text);
+    }
+    .modal-content h3 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+    .modal-content form input,
+    .modal-content form textarea,
+    .modal-content form select {
+      width: 100%;
+      margin-bottom: 16px;
+      padding: 10px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 6px;
+      font-size: 1em;
+    }
+    .modal-content form button {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .close-modal {
+      position: absolute;
+      top: 12px; right: 16px;
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 1.4em;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer.super-footer {
+      background: var(--card);
+      padding: 60px 30px 30px;
+      border-top: 2px solid var(--accent);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: auto;
+      align-items: start;
+    }
+    .footer-column h4 {
+      margin-top: 0;
+      font-size: 1.2em;
+      margin-bottom: 16px;
+      color: var(--accent);
+    }
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-column ul li::before {
+      content: "➤ ";
+      color: var(--accent);
+    }
+    .cert-pill {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin: 4px 10px 4px 0;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+    .social-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .social-icons img {
+      height: 24px;
+      filter: grayscale(1);
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+    .social-icons img:hover {
+      filter: none;
+      transform: scale(1.2);
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.85em;
+      color: var(--dim);
+    }
+    header {
+  direction: ltr; /* Lock the layout direction */
+}
+  </style>
+</head>
+<body>
+  <select id="language-switcher">
+    <option value="en">English</option>
+    <option value="fa">فارسی</option>
+    <option value="tr">Türkçe</option>
+  </select>
+  <button class="toggle-button" onclick="toggleTheme()">Toggle Theme</button>
+
+  <header>
+    <div class="logo-section">
+      <img src="assets/LOGO.png" alt="RAHA Logo" />
+      <h2 class="company-title">RAHA PETROLKIMIA</h2>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="services.html" class="active">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="big-intro">
+      <img src="assets/services.avif" alt="RAHA Services Overview" />
+      <h2></h2>
+      <p></p>
+    </section>
+
+    <section class="section">
+      <h2></h2>
+      <div class="service-grid">
+        <div class="service-card" onclick="openModal('consultation')">
+          <h3></h3>
+          <p></p>
+        </div>
+        <div class="service-card" onclick="openModal('incoterms')">
+          <h3></h3>
+          <p></p>
+        </div>
+        <div class="service-card" onclick="openModal('engineering')">
+          <h3></h3>
+          <p></p>
+        </div>
+        <div class="service-card" onclick="openModal('documentation')">
+          <h3></h3>
+          <p></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modals -->
+    <div id="modal-consultation" class="modal">
+      <div class="modal-content">
+        <button class="close-modal" onclick="closeModal('consultation')">&times;</button>
+        <h3></h3>
+        <form>
+          <input type="text" required />
+          <input type="email" required />
+          <select required>
+            <option></option>
+            <option>Bitumen</option>
+            <option>Base Oil</option>
+            <option>Paraffin Wax</option>
+            <option>Slack Wax</option>
+          </select>
+          <textarea rows="4" required></textarea>
+          <button type="submit"></button>
+        </form>
+      </div>
+    </div>
+    <div id="modal-incoterms" class="modal">
+      <div class="modal-content">
+        <button class="close-modal" onclick="closeModal('incoterms')">&times;</button>
+        <h3></h3>
+        <form>
+          <input type="text" required />
+          <input type="email" required />
+          <select required>
+            <option></option>
+            <option>FOB</option>
+            <option>CFR</option>
+            <option>DDP</option>
+          </select>
+          <textarea rows="4" required></textarea>
+          <button type="submit"></button>
+        </form>
+      </div>
+    </div>
+    <div id="modal-engineering" class="modal">
+      <div class="modal-content">
+        <button class="close-modal" onclick="closeModal('engineering')">&times;</button>
+        <h3></h3>
+        <form>
+          <input type="text" required />
+          <input type="email" required />
+          <textarea rows="4" required></textarea>
+          <button type="submit"></button>
+        </form>
+      </div>
+    </div>
+    <div id="modal-documentation" class="modal">
+      <div class="modal-content">
+        <button class="close-modal" onclick="closeModal('documentation')">&times;</button>
+        <h3></h3>
+        <form>  
+          <input type="text" required />
+          <input type="email" required />
+          <select required>
+            <option></option>
+            <option>SDS</option>
+            <option>COA</option>
+            <option>Export Clearance</option>
+          </select>
+          <textarea rows="4" required></textarea>
+          <button type="submit"></button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="super-footer">
+    <div class="footer-grid">
+      <div class="footer-column">
+        <h4>Our Offices</h4>
+        <p>🇹🇷 <strong>Ankara HQ:</strong> Altinoran Complex, Tower 3</p>
+        <p>🇦🇪 <strong>Dubai Regional:</strong> Burlington Tower, Business Bay</p>
+      </div>
+      <div class="footer-column">
+        <h4>Services Offered</h4>
+        <ul>
+          <li>Engineering & Setup</li>
+          <li>Documentation & SDS</li>
+          <li>Regulatory Compliance</li>
+          <li>Logistics Planning</li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Certified</h4>
+        <span class="cert-pill">ISO 9001</span>
+        <span class="cert-pill">SGS Certified</span>
+      </div>
+      <div class="footer-column">
+        <h4>Get in Touch</h4>
+        <p><a href="mailto:info@rahapetrolkimia.com">info@rahapetrolkimia.com</a></p>
+        <p><span></span> <span dir="ltr">+90 552 693 15 10</span></p>
+        <div class="social-icons">
+          <a href="#"><img src="assets/linkedin.svg" alt="LinkedIn" /></a>
+          <a href="#"><img src="assets/twitter.svg" alt="Twitter" /></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p id="footer-final-note"></p>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+  en: {
+    introHeading: "Strategic Petroleum Services. Delivered.",
+    introText: "RAHA PETROLKIMIA provides tailored solutions for sourcing, logistics, compliance, engineering, and consultation. Whether you're a government, refinery, distributor, or end user — our services ensure reliability, speed, and clarity every step of the way.",
+    specializedHeading: "Our Specialized Services",
+    services: [
+      ["Product Consultation", "Let our experts recommend the right petroleum product for your application."],
+      ["Incoterms Advisory", "Choose the most efficient logistics plan—FOB, CFR, DDP—we’ll guide you."],
+      ["Engineering & Technical", "Get automation, piping, or installation support for your facility."],
+      ["Documentation & Compliance", "Let us handle SDS, export docs, and customs clearance worldwide."]
+    ],
+    footer: {
+      bottom: "© 2025 RAHA PETROLKIMIA. Built for precision and care.",
+      offices: "Our Offices",
+      services: "Services Offered",
+      certified: "Certified",
+      contact: "Get in Touch",
+      items: [
+        "Engineering & Setup",
+        "Documentation & SDS",
+        "Regulatory Compliance",
+        "Logistics Planning"
+      ]
+    },
+    modals: {
+      consultation: {
+        title: "Product Consultation",
+        name: "Your Name",
+        email: "Your Email",
+        select: "Select Product",
+        textarea: "Describe your application...",
+        button: "Request Consultation"
+      },
+      incoterms: {
+        title: "Incoterms Advisory",
+        name: "Your Company",
+        email: "Contact Email",
+        select: "Preferred Incoterm",
+        textarea: "Destination and volume...",
+        button: "Request Advice"
+      },
+      engineering: {
+        title: "Engineering & Technical",
+        name: "Project Title",
+        email: "Your Email",
+        select: "",
+        textarea: "Technical requirements and scope...",
+        button: "Request Support"
+      },
+      documentation: {
+        title: "Documentation & Compliance",
+        name: "Your Name",
+        email: "Your Email",
+        select: "Requested Document",
+        textarea: "Product and region...",
+        button: "Request Documents"
+      }
+    }
+  },
+
+  fa: {
+    introHeading: "خدمات راهبردی نفتی. تحویل شده.",
+    introText: "رها پترول کیمیا راه‌حل‌های اختصاصی برای تأمین، لجستیک، انطباق، مهندسی و مشاوره ارائه می‌دهد. چه دولتی، پالایشگاهی، توزیع‌کننده یا مصرف‌کننده نهایی باشید – خدمات ما در هر مرحله قابلیت اعتماد، سرعت و شفافیت را تضمین می‌کند.",
+    specializedHeading: "خدمات تخصصی ما",
+    services: [
+      ["مشاوره محصول", "اجازه دهید کارشناسان ما محصول نفتی مناسب را برای کاربرد شما پیشنهاد دهند."],
+      ["راهنمای اینکوتِرم", "برنامه لجستیکی مناسب—FOB، CFR، DDP—را انتخاب کنید، ما شما را راهنمایی می‌کنیم."],
+      ["مهندسی و فنی", "پشتیبانی در زمینه اتوماسیون، لوله‌کشی یا نصب را برای مجموعه خود دریافت کنید."],
+      ["مدارک و انطباق", "مدیریت SDS، مدارک صادراتی و ترخیص گمرکی را به ما بسپارید."]
+    ],
+    footer: {
+      bottom: "© ۲۰۲۵ رها پترول کیمیا. ساخته شده برای دقت و توجه.",
+      offices: "دفاتر ما",
+      services: "خدمات ارائه شده",
+      certified: "دارای گواهینامه",
+      contact: "تماس با ما",
+      items: [
+        "مهندسی و راه‌اندازی",
+        "مدارک و SDS",
+        "انطباق مقررات",
+        "برنامه‌ریزی لجستیکی"
+      ]
+    },
+    modals: {
+      consultation: {
+        title: "مشاوره محصول",
+        name: "نام شما",
+        email: "ایمیل شما",
+        select: "انتخاب محصول",
+        textarea: "کاربرد خود را توضیح دهید...",
+        button: "درخواست مشاوره"
+      },
+      incoterms: {
+        title: "راهنمای اینکوتِرم",
+        name: "نام شرکت",
+        email: "ایمیل تماس",
+        select: "اینکوتِرم ترجیحی",
+        textarea: "مقصد و حجم...",
+        button: "درخواست راهنمایی"
+      },
+      engineering: {
+        title: "مهندسی و فنی",
+        name: "عنوان پروژه",
+        email: "ایمیل شما",
+        select: "",
+        textarea: "نیازهای فنی و محدوده پروژه...",
+        button: "درخواست پشتیبانی"
+      },
+      documentation: {
+        title: "مدارک و انطباق",
+        name: "نام شما",
+        email: "ایمیل شما",
+        select: "مدرک درخواستی",
+        textarea: "محصول و منطقه...",
+        button: "درخواست مدارک"
+      }
+    }
+  },
+
+  tr: {
+    introHeading: "Stratejik Petrol Hizmetleri. Teslim Edildi.",
+    introText: "RAHA PETROLKIMIA tedarik, lojistik, uyumluluk, mühendislik ve danışmanlık için özel çözümler sunar. Devlet, rafineri, distribütör veya son kullanıcı olsanız bile — hizmetlerimiz her adımda güvenilirlik, hız ve netlik sağlar.",
+    specializedHeading: "Uzmanlık Hizmetlerimiz",
+    services: [
+      ["Ürün Danışmanlığı", "Uzmanlarımız uygulamanız için doğru petrol ürününü önersin."],
+      ["Incoterms Danışmanlığı", "FOB, CFR, DDP gibi en uygun lojistik planı seçin — size rehberlik ediyoruz."],
+      ["Engineering & Technical", "Tesisiniz için otomasyon, borulama veya kurulum desteği alın."],
+      ["Belgeler ve Uyumluluk", "SDS, ihracat belgeleri ve gümrük işlemlerini biz halledelim."]
+    ],
+    footer: {
+      bottom: "© 2025 RAHA PETROLKIMIA. Hassasiyet ve özen ile inşa edildi.",
+      offices: "Ofislerimiz",
+      services: "Sunulan Hizmetler",
+      certified: "Sertifikalar",
+      contact: "İletişim",
+      items: [
+        "Mühendislik & Kurulum",
+        "Belgeler & SDS",
+        "Yasal Uyum",
+        "Lojistik Planlama"
+      ]
+    },
+    modals: {
+      consultation: {
+        title: "Ürün Danışmanlığı",
+        name: "Adınız",
+        email: "E-posta adresiniz",
+        select: "Ürün seçin",
+        textarea: "Uygulamanızı açıklayın...",
+        button: "Danışmanlık Talebi"
+      },
+      incoterms: {
+        title: "Incoterms Danışmanlığı",
+        name: "Şirketiniz",
+        email: "İletişim E-postası",
+        select: "Tercih edilen Incoterm",
+        textarea: "Teslimat yeri ve hacim...",
+        button: "Danışmanlık Talebi"
+      },
+      engineering: {
+        title: "Engineering & Technical",
+        name: "Proje Başlığı",
+        email: "E-posta adresiniz",
+        select: "",
+        textarea: "Teknik gereksinimler ve kapsam...",
+        button: "Destek Talebi"
+      },
+      documentation: {
+        title: "Belgeler ve Uyumluluk",
+        name: "Adınız",
+        email: "E-posta adresiniz",
+        select: "Talep edilen belge",
+        textarea: "Ürün ve bölge...",
+        button: "Belge Talebi"
+      }
+    }
+  }
+};
+
+    function toggleTheme() {
+      const isLight = document.documentElement.classList.toggle('light-mode');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    }
+
+    function applyTranslations(lang) {
+      const t = translations[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+
+      // Intro
+      document.querySelector('.big-intro h2').textContent = t.introHeading;
+      document.querySelector('.big-intro p').textContent = t.introText;
+
+      // Section title
+      document.querySelector('.section h2').textContent = t.specializedHeading;
+
+      // Service cards
+      const cards = document.querySelectorAll('.service-card');
+      cards.forEach((card, i) => {
+        card.querySelector('h3').textContent = t.services[i][0];
+        card.querySelector('p').textContent = t.services[i][1];
+      });
+
+      // Footer text
+      document.getElementById('footer-final-note').textContent = t.footer;
+
+      // Modals
+      Object.keys(t.modals).forEach(id => {
+        const m = t.modals[id];
+        const modal = document.getElementById('modal-' + id);
+        modal.querySelector('h3').textContent = m.title;
+        const inputs = modal.querySelectorAll('input');
+        inputs[0].placeholder = m.name;
+        inputs[1].placeholder = m.email;
+        const select = modal.querySelector('select');
+        if (select) select.options[0].textContent = m.select || '';
+        const textarea = modal.querySelector('textarea');
+        textarea.placeholder = m.textarea;
+        const button = modal.querySelector('button[type=submit]');
+        button.textContent = m.button;
+        const f = t.footer;
+        document.querySelectorAll(".footer-column")[0].querySelector("h4").textContent = f.offices;
+        document.querySelectorAll(".footer-column")[1].querySelector("h4").textContent = f.services;
+        const ul = document.querySelectorAll(".footer-column")[1].querySelector("ul");
+        ul.innerHTML = ""; f.items.forEach(txt => ul.innerHTML += `<li>${txt}</li>`);
+        document.querySelectorAll(".footer-column")[2].querySelector("h4").textContent = f.certified;
+        document.querySelectorAll(".footer-column")[3].querySelector("h4").textContent = f.contact;
+        document.getElementById("footer-final-note").textContent = f.bottom;
+
+        // reset form listener
+        const form = modal.querySelector('form');
+        form.replaceWith(form.cloneNode(true));
+        modal.querySelector('form').addEventListener('submit', e => {
+          e.preventDefault();
+          alert(`${m.button} received. We'll get back to you shortly.`);
+          modal.style.display = 'none';
+        });
+      });
+    }
+
+    function openModal(id) {
+      document.getElementById('modal-' + id).style.display = 'flex';
+    }
+    function closeModal(id) {
+      document.getElementById('modal-' + id).style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('language') || 'en';
+      document.getElementById('language-switcher').value = savedLang;
+      applyTranslations(savedLang);
+      document.getElementById('language-switcher')
+        .addEventListener('change', e => {
+          localStorage.setItem('language', e.target.value);
+          applyTranslations(e.target.value);
+        });
+    });
+  </script>
+</body>
+</html>

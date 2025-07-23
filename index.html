@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>RAHA PETROLKIMIA – Petroleum Trading & Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.add('light-mode');
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #121212;
+      --text: #f1f1f1;
+      --card: #1f1f1f;
+      --accent: #ff9900;
+      --dim: #999;
+      --border: #cc5c00;
+    }
+    .light-mode {
+      --bg: #ffffff;
+      --text: #2c2c2c;
+      --card: #fff3f0;
+      --accent: #d93425;
+      --dim: #777;
+      --border: #bf2c1a;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+    a { text-decoration: none; color: inherit; }
+    header {
+      background: var(--card);
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(255,165,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo-section { display: flex; align-items: center; }
+    .logo-section img { height: 40px; margin-right: 12px; }
+    .company-title { font-size: 1.8em; font-weight: bold; color: var(--accent); }
+    nav { display: flex; gap: 18px; }
+    nav a {
+      position: relative;
+      font-weight: 500;
+      padding-bottom: 4px;
+      transition: color 0.3s ease;
+    }
+    nav a:hover, nav a.active { color: var(--accent); }
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after, nav a.active::after { width: 100%; }
+    #language-switcher, .toggle-button {
+      position: fixed;
+      right: 20px;
+      z-index: 999;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+    #language-switcher {
+      bottom: 70px;
+      padding: 8px;
+      background: var(--card);
+      border: 1px solid var(--accent);
+      color: var(--text);
+    }
+    .toggle-button {
+      bottom: 20px;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 10px 16px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+    .hero h1 {
+      font-size: 2.6em;
+      background: linear-gradient(to right, var(--accent), var(--border));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: 1.2em;
+      color: var(--text);
+      max-width: 700px;
+      margin: auto;
+    }
+    .section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .section h2 {
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 40px;
+      background: linear-gradient(to right, var(--accent), var(--border));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .section p {
+      text-align: center;
+      font-size: 1em;
+      color: var(--dim);
+      line-height: 1.7;
+      max-width: 900px;
+      margin: auto;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 16px rgba(255,165,0,0.2);
+    }
+    .product-card img {
+      width: 100%;
+      max-height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .product-card h3 { color: var(--accent); font-size: 1.3em; margin-bottom: 8px; }
+    .product-card p { color: var(--dim); font-size: 0.95em; margin-bottom: 12px; }
+
+    .super-footer {
+      background: var(--card);
+      padding: 60px 30px 30px;
+      color: var(--text);
+      border-top: 2px solid var(--accent);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .footer-column h4 {
+      font-size: 1.2em;
+      margin-bottom: 16px;
+      color: var(--accent);
+    }
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+    }
+    .footer-column ul li::before {
+      content: "➤ ";
+      color: var(--accent);
+    }
+    .cert-pill {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin: 4px 10px 4px 0;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+    .social-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .social-icons img {
+      height: 24px;
+      filter: grayscale(1);
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+    .social-icons img:hover {
+      filter: none;
+      transform: scale(1.2);
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.85em;
+      color: var(--dim);
+    }
+    header {
+  direction: ltr; 
+}
+  </style>
+</head>
+<body>
+  <select id="language-switcher">
+    <option value="en">English</option>
+    <option value="fa">فارسی</option>
+    <option value="tr">Türkçe</option>
+  </select>
+  <button class="toggle-button" onclick="toggleTheme()">Toggle Theme</button>
+
+  <header>
+    <div class="logo-section">
+      <img src="assets/LOGO.png" alt="RAHA Logo" />
+      <h2 class="company-title">RAHA PETROLKIMIA</h2>
+    </div>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1 id="hero-title"></h1>
+    <p id="hero-sub"></p>
+  </section>
+
+  <section class="section">
+    <h2 id="overview-heading"></h2>
+       <p id="overview-text"></p>
+  </section>
+
+  <section class="section">
+    <h2 id="products-heading"></h2>
+    <div class="product-grid" id="product-grid"></div>
+  </section>
+
+  <section class="section">
+    <h2 id="reach-heading"></h2>
+    <p id="reach-text"></p>
+  </section>
+
+  <section class="section">
+    <h2 id="tech-heading"></h2>
+    <p id="tech-text"></p>
+  </section>
+
+  <section class="section">
+    <h2 id="philosophy-heading"></h2>
+    <p id="philosophy-text"></p>
+  </section>
+
+  <section class="section">
+    <div class="cta-box" style="text-align: center;">
+      <p id="cta-message"></p>
+      <a href="contact.html" id="cta-button"></a>
+    </div>
+  </section>
+
+  <!-- 🚀 Fancy Footer -->
+  <footer class="super-footer">
+    <div class="footer-grid">
+      <div class="footer-column">
+        <h4 id="footer-location-title"></h4>
+        <p>🇹🇷 <strong>Ankara HQ:</strong> Altinoran Complex, Tower 3</p>
+        <p>🇦🇪 <strong>Dubai Regional:</strong> Burlington Tower, Business Bay</p>
+      </div>
+      <div class="footer-column">
+        <h4 id="footer-services-title"></h4>
+        <ul id="footer-services-list"></ul>
+      </div>
+      <div class="footer-column">
+        <h4 id="footer-cert-title"></h4>
+        <span class="cert-pill">ISO 9001</span>
+        <span class="cert-pill">SGS Certified</span>
+      </div>
+      <div class="footer-column">
+        <h4 id="footer-contact-title"></h4>
+        <p><a href="mailto:info@rahapetrolkimia.com">info@rahapetrolkimia.com</a></p>
+        <p><span></span> <span dir="ltr">+90 552 693 15 10</span></p>
+        <div class="social-icons">
+          <a href="#"><img src="assets/linkedin.svg" alt="LinkedIn" /></a>
+          <a href="#"><img src="assets/twitter.svg" alt="Twitter" /></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p id="footer-final-note"></p>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+  en: {
+    heroTitle: "RAHA PETROLKIMIA",
+    heroSub: "From sourcing to shipping, we deliver petroleum products with integrity, accuracy, and speed.",
+    overviewHeading: "Company Overview",
+    overviewText: "RAHA PETROLKIMIA specializes in the international supply of petroleum derivatives including Bitumen, Base Oil, Paraffin Wax, Slack Wax, and Petroleum Jelly. With direct links to refineries, certified labs, and inspection services, we ensure every shipment meets international specifications. Our infrastructure spans multiple regions with export capabilities via sea, land, and air.",
+    productsHeading: "Featured Products",
+    products: [
+      ["Bitumen 60/70", "Penetration grade asphalt for road construction and waterproofing", "assets/bitumen.webp", "products/bitumen.html"],
+      ["Base Oil SN500", "Lubricant base stock for industrial blending and refinery use", "assets/baseoil.webp", "products/baseoil.html"],
+      ["Paraffin Wax", "Fully refined wax used in candles, coatings, and cosmetics", "assets/paraffin.png", "products/paraffin.html"],
+      ["Rubber Process Oil", "Dark aromatic oil for softening rubber compounds and improving processing efficiency in manufacturing", "assets/rubberoil.jpg", "products/rpo.html"],
+      ["Slack Wax", "Semi-refined wax used in emulsions, polishes, and construction materials", "assets/slackwax.jpg", "products/slackwax.html"],
+      ["Petroleum Jelly", "Multipurpose petroleum-based gel for medical, cosmetic, and industrial applications", "assets/jelly.webp", "products/petroleumjelly.html"]
+    ],
+    reachHeading: "Global Presence",
+    reachText: "RAHA PETROLKIMIA operates in over 140 countries, delivering petroleum products with precision and reliability. Our infrastructure spans continents, ensuring timely delivery and compliance with international standards.",
+    techHeading: "Technology & Standards",
+    techText: "We prioritize modern technologies and strict adherence to global benchmarks. Our production facilities and inspection protocols meet ISO, ASTM, and SGS standards, guaranteeing quality and safety.",
+    philosophyHeading: "Service Philosophy",
+    philosophyText: "We believe in integrity, responsiveness, and technical excellence. Every deal is shaped by customer needs, environmental awareness, and ethical responsibility. Our team reacts swiftly and faithfully to every inquiry.",
+    ctaMessage: "Looking for a trusted petroleum partner? RAHA PETROLKIMIA is ready to serve your needs with speed and precision.",
+    ctaButton: "Contact Us",
+    footerStructured: {
+      locationTitle: "Our Offices",
+      servicesTitle: "Services Offered",
+      services: [
+        "Engineering & Setup",
+        "Documentation & SDS",
+        "Regulatory Compliance",
+        "Logistics Planning"
+      ],
+      certTitle: "Certified",
+      contactTitle: "Get in Touch",
+      finalNote: "© 2025 RAHA PETROLKIMIA. Trusted Petroleum Supply & Strategy."
+    }
+  },
+
+  fa: {
+    heroTitle: "رها پترول کیمیا",
+    heroSub: "از تأمین تا ارسال، ما محصولات نفتی را با صداقت، دقت و سرعت ارائه می‌دهیم.",
+    overviewHeading: "معرفی شرکت",
+    overviewText: "رها پترول کیمیا در تأمین بین‌المللی مشتقات نفتی از جمله بیتومن، روغن پایه، پارافین، اسلک واک و ژل نفتی تخصص دارد. با دسترسی مستقیم به پالایشگاه‌ها، آزمایشگاه‌های معتبر و خدمات بازرسی، هر محموله مطابق با استانداردهای بین‌المللی تحویل داده می‌شود. زیرساخت ما شامل مسیرهای دریایی، زمینی و هوایی در چندین منطقه است.",
+    productsHeading: "محصولات منتخب",
+    products: [
+      ["بیتومن ۶۰/۷۰", "آسفالت با درجه نفوذ برای راه‌سازی و ضدآب‌سازی", "assets/bitumen.webp", "products/bitumen.html"],
+      ["روغن پایه SN500", "پایه روغن روان‌کننده برای ترکیب‌های صنعتی و پالایشگاهی", "assets/baseoil.webp", "products/baseoil.html"],
+      ["پارافین واکس", "واکس کاملاً تصفیه‌شده برای شمع، پوشش‌ها و لوازم آرایشی", "assets/paraffin.png", "products/paraffin.html"],
+      ["روغن فرآوری لاستیک", "روغن تیره برای نرم‌سازی ترکیبات لاستیکی و بهبود فرآیند تولید", "assets/rubberoil.jpg", "products/rpo.html"],
+      ["اسلک واکس", "واکس نیمه‌تصفیه شده برای امولسیون، پولیش و مصالح ساختمانی", "assets/slackwax.jpg", "products/slackwax.html"],
+      ["ژل نفتی", "ژل نفتی چندمنظوره برای کاربردهای پزشکی، آرایشی و صنعتی", "assets/jelly.webp", "products/petroleumjelly.html"]
+    ],
+    reachHeading: "حضور جهانی",
+    reachText: "رها پترول کیمیا در بیش از ۱۴۰ کشور فعالیت می‌کند و محصولات نفتی را با دقت و اعتماد عرضه می‌کند. زیرساخت‌های ما قاره‌های مختلف را پوشش می‌دهد و تحویل به‌موقع و رعایت استانداردهای بین‌المللی را تضمین می‌نماید.",
+    techHeading: "فناوری و استانداردها",
+    techText: "ما فناوری‌های نوین و رعایت دقیق استانداردهای جهانی را اولویت می‌دهیم. تجهیزات تولید و فرآیندهای بازرسی ما مطابق با استانداردهای ISO، ASTM و SGS هستند و کیفیت و ایمنی را تضمین می‌کنند.",
+    philosophyHeading: "فلسفه خدمات",
+    philosophyText: "ما به صداقت، پاسخگویی و تخصص فنی اعتقاد داریم. هر معامله بر اساس نیاز مشتری، آگاهی زیست‌محیطی و مسئولیت اخلاقی شکل می‌گیرد. تیم ما با سرعت و صداقت به هر درخواست واکنش نشان می‌دهد.",
+    ctaMessage: "به دنبال شریک قابل اعتماد نفتی هستید؟ رها پترول کیمیا با سرعت و دقت آماده خدمت‌رسانی به شماست.",
+    ctaButton: "تماس با ما",
+    footerStructured: {
+      locationTitle: "دفاتر ما",
+      servicesTitle: "خدمات ارائه شده",
+      services: [
+        "مهندسی و نصب",
+        "مدارک و SDS",
+        "انطباق قانونی",
+        "برنامه‌ریزی لجستیک"
+      ],
+      certTitle: "تأیید شده",
+      contactTitle: "تماس با ما",
+      finalNote: "© ۲۰۲۵ رها پترول کیمیا. ساخته شده بر پایه اعتماد و فناوری."
+    }
+  },
+
+  tr: {
+    heroTitle: "RAHA PETROLKIMIA",
+    heroSub: "Tedarikten sevkiyata kadar petrol ürünlerini dürüstlük, hassasiyet ve hız ile sunuyoruz.",
+    overviewHeading: "Şirket Özeti",
+    overviewText: "RAHA PETROLKIMIA; Bitüm, Baz Yağ, Parafin, Slack Wax ve Petrol Jeli gibi petrol türevlerinin uluslararası tedariki konusunda uzmandır. Rafinerilere, sertifikalı laboratuvarlara ve denetim hizmetlerine doğrudan bağlantılar sayesinde, her sevkiyatın uluslararası standartlara uygun olması sağlanır. Altyapımız, deniz, kara ve hava yoluyla çok bölgeli ihracat kabiliyetini kapsar.",
+    productsHeading: "Öne Çıkan Ürünler",
+    products: [
+      ["Bitüm 60/70", "Yol inşaatı ve su yalıtımı için penetrasyon dereceli asfalt", "assets/bitumen.webp", "products/bitumen.html"],
+      ["Baz Yağ SN500", "Endüstriyel karışımlar ve rafineri kullanımı için baz yağ", "assets/baseoil.webp", "products/baseoil.html"],
+      ["Parafin", "Tam rafine edilmiş mum, kaplama ve kozmetik uygulamaları için", "assets/paraffin.png", "products/paraffin.html"],
+      ["Kauçuk İşleme Yağı", "Kauçuk bileşiklerini yumuşatmak ve üretim verimliliğini artırmak için aromatik yağ", "assets/rubberoil.jpg", "products/rpo.html"],
+      ["Slack Wax", "Emülsiyonlar, cilalar ve inşaat malzemelerinde kullanılan yarı rafine mum", "assets/slackwax.jpg", "products/slackwax.html"],
+      ["Petrol Jeli", "Tıbbi, kozmetik ve endüstriyel uygulamalar için çok amaçlı jel", "assets/jelly.webp", "products/petroleumjelly.html"]
+    ],
+    reachHeading: "Küresel Varlık",
+    reachText: "RAHA PETROLKIMIA 140'tan fazla ülkede faaliyet göstermekte olup ürünlerini hassasiyet ve güvenilirlikle sunar. Altyapımız kıtaları kapsar, zamanında teslimat ve uluslararası standartlara uyumu sağlar.",
+    techHeading: "Teknoloji ve Standartlar",
+    techText: "Modern teknolojileri ve küresel standartlara sıkı uyumu ön planda tutuyoruz. Tesislerimiz ve denetim protokollerimiz ISO, ASTM ve SGS standartlarına uygundur ve kalite ile güvenliği garanti eder.",
+    philosophyHeading: "Hizmet Felsefemiz",
+    philosophyText: "Dürüstlük, hızlı yanıt ve teknik mükemmelliğe inanıyoruz. Her anlaşma müşteri ihtiyaçları, çevre bilinci ve etik sorumluluklarla şekillenir. Ekibimiz her talebe hızlı ve güvenilir şekilde cevap verir.",
+    ctaMessage: "Güvenilir bir petrol ortağı mı arıyorsunuz? RAHA PETROLKIMIA hız ve hassasiyetle hizmete hazır.",
+    ctaButton: "İletişime Geçin",
+    footerStructured: {
+      locationTitle: "Ofislerimiz",
+      servicesTitle: "Sunulan Hizmetler",
+      services: [
+        "Mühendislik ve Kurulum",
+        "Belgeler ve SDS",
+        "Yasal Uyum",
+        "Lojistik Planlama"
+      ],
+      certTitle: "Sertifikalı",
+      contactTitle: "İletişime Geçin",
+      finalNote: "© 2025 RAHA PETROLKIMIA. Güvenilir Petrol Tedariki ve Strateji."
+    }
+  }
+};
+
+    function toggleTheme() {
+      const isLight = document.documentElement.classList.toggle('light-mode');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    }
+
+    function applyTranslations(lang) {
+      const t = translations[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
+
+      document.getElementById("hero-title").textContent = t.heroTitle;
+      document.getElementById("hero-sub").textContent = t.heroSub;
+      document.getElementById("overview-heading").textContent = t.overviewHeading;
+      document.getElementById("overview-text").textContent = t.overviewText;
+      document.getElementById("products-heading").textContent = t.productsHeading;
+
+      const grid = document.getElementById("product-grid");
+      grid.innerHTML = "";
+      t.products.forEach(([title, desc, img, link]) => {
+        const card = document.createElement("a");
+        card.className = "product-card";
+        card.href = link;
+        card.innerHTML = `<img src="${img}" alt="${title}" /><h3>${title}</h3><p>${desc}</p>`;
+        grid.appendChild(card);
+      });
+
+      document.getElementById("reach-heading").textContent = t.reachHeading;
+      document.getElementById("reach-text").textContent = t.reachText;
+      document.getElementById("tech-heading").textContent = t.techHeading;
+      document.getElementById("tech-text").textContent = t.techText;
+      document.getElementById("philosophy-heading").textContent = t.philosophyHeading;
+      document.getElementById("philosophy-text").textContent = t.philosophyText;
+      document.getElementById("cta-message").textContent = t.ctaMessage;
+      document.getElementById("cta-button").textContent = t.ctaButton;
+
+      document.getElementById("footer-location-title").textContent = t.footerStructured.locationTitle;
+      document.getElementById("footer-services-title").textContent = t.footerStructured.servicesTitle;
+      document.getElementById("footer-cert-title").textContent = t.footerStructured.certTitle;
+      document.getElementById("footer-contact-title").textContent = t.footerStructured.contactTitle;
+      document.getElementById("footer-final-note").textContent = t.footerStructured.finalNote;
+
+      const serviceList = document.getElementById("footer-services-list");
+      serviceList.innerHTML = "";
+      t.footerStructured.services.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        serviceList.appendChild(li);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const lang = localStorage.getItem("language") || "en";
+      document.getElementById("language-switcher").value = lang;
+      applyTranslations(lang);
+      document.getElementById("language-switcher").addEventListener("change", e => {
+        const newLang = e.target.value;
+        localStorage.setItem("language", newLang);
+        applyTranslations(newLang);
+      });
+    });
+  </script>
+</body>
+</html>

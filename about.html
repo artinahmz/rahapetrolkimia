@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About – RAHA PETROLKIMIA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.add('light-mode');
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #121212;
+      --text: #f1f1f1;
+      --card: #1f1f1f;
+      --accent: #ff9900;
+      --dim: #999;
+      --border: #cc5c00;
+    }
+    .light-mode {
+      --bg: #ffffff;
+      --text: #2c2c2c;
+      --card: #fff3f0;
+      --accent: #d93425;
+      --dim: #777;
+      --border: #bf2c1a;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--card);
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(255,165,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo-section { display: flex; align-items: center; }
+    .logo-section img { height: 40px; margin-right: 12px; }
+    .company-title { font-size: 1.8em; font-weight: bold; color: var(--accent); }
+    nav { display: flex; gap: 18px; }
+    nav a {
+      position: relative;
+      font-weight: 500;
+      padding-bottom: 4px;
+      text-decoration: none;
+      color: var(--text);
+      transition: color 0.3s ease;
+    }
+    nav a:hover, nav a.active { color: var(--accent); }
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      color: var(--accent);
+      text-decoration: none;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after, nav a.active::after { width: 100%; }
+
+    nav a.active {
+      border-bottom: none;
+      text-decoration: none;
+    }
+
+    .intro-section {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+    .intro-section h1 {
+      font-size: 2.8em;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, var(--accent), var(--border));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .intro-section p {
+      max-width: 900px;
+      margin: auto;
+      font-size: 1.2em;
+      color: var(--dim);
+      line-height: 1.8;
+    }
+
+    .story-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .story-text, .story-extra {
+      flex: 1 1 45%;
+    }
+    .story-text h2 {
+      font-size: 2em;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .story-text p {
+      font-size: 1.1em;
+      color: var(--dim);
+      line-height: 1.8;
+    }
+    .story-extra {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    .story-extra blockquote {
+      background: var(--card);
+      padding: 24px;
+      border-left: 5px solid var(--accent);
+      font-style: italic;
+      border-radius: 12px;
+      color: var(--text);
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    footer.super-footer {
+      background: var(--card);
+      border-top: 2px solid var(--accent);
+      padding: 60px 30px 0;
+      margin-top: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-column h4 {
+      font-size: 1.2em;
+      margin-bottom: 16px;
+      color: var(--accent);
+    }
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-column ul li::before {
+      content: "➤ ";
+      color: var(--accent);
+    }
+    .cert-pill {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin: 4px 10px 4px 0;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+    .social-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .social-icons img {
+      height: 24px;
+      filter: grayscale(1);
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+    .social-icons img:hover {
+      filter: none;
+      transform: scale(1.2);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      font-size: 0.85em;
+      color: var(--dim);
+      padding: 30px 10px;
+      direction: ltr;
+    }
+
+    #language-switcher, .toggle-button {
+      position: fixed;
+      right: 20px;
+      z-index: 9999;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+    #language-switcher {
+      bottom: 70px;
+      background: var(--card);
+      border: 1px solid var(--accent);
+      color: var(--text);
+      padding: 8px;
+    }
+    .toggle-button {
+      bottom: 20px;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 10px 16px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 700px) {
+      .form-row { grid-template-columns: 1fr; }
+      .full-width { grid-column: span 1; }
+      .story-section { flex-direction: column; }
+    }
+    header {
+      direction: ltr;
+    }
+  </style>
+</head>
+<body>
+  <select id="language-switcher">
+    <option value="en">English</option>
+    <option value="fa">فارسی</option>
+    <option value="tr">Türkçe</option>
+  </select>
+  <button class="toggle-button" onclick="toggleTheme()">Toggle Theme</button>
+
+  <header>
+    <div class="logo-section">
+      <img src="assets/LOGO.png" alt="RAHA Logo" />
+      <h2 class="company-title">RAHA PETROLKIMIA</h2>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html" class="active">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="intro-section">
+    <h1></h1>
+    <p></p>
+  </section>
+
+  <section class="story-section">
+    <div class="story-text">
+      <h2></h2>
+      <p></p>
+      <p></p>
+      <p></p>
+    </div>
+    <div class="story-extra">
+      <blockquote></blockquote>
+    </div>
+  </section>
+
+  <footer class="super-footer">
+    <div class="footer-grid">
+      <div class="footer-column">
+        <h4></h4>
+        <p>🇹🇷 <strong>Ankara HQ:</strong> Altinoran Complex, Tower 3</p>
+        <p>🇦🇪 <strong>Dubai Regional:</strong> Burlington Tower, Business Bay</p>
+      </div>
+      <div class="footer-column">
+        <h4></h4>
+        <ul></ul>
+      </div>
+      <div class="footer-column">
+        <h4></h4>
+        <span class="cert-pill">ISO 9001</span>
+        <span class="cert-pill">SGS Certified</span>
+      </div>
+      <div class="footer-column">
+        <h4></h4>
+        <p><span>✉️</span> <span dir="ltr">info@rahapetrolkimia.com</span></p>
+        <p><span>📞</span> <span dir="ltr">+90 552 693 15 10</span></p>
+        <div class="social-icons">
+          <a href="#"><img src="assets/linkedin.svg" alt="LinkedIn" /></a>
+          <a href="#"><img src="assets/twitter.svg" alt="Twitter" /></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p id="footer-final-note"></p>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+  en: {
+    intro: {
+      heading: "Empowering Petroleum Progress",
+      body: "At RAHA PETROLKIMIA, every barrel, every document, and every delivery is more than a transaction — it’s a pledge. Our journey connects producers, regulators, and global markets with engineering accuracy and human care. We’re not just logistics providers; we’re interpreters of complexity, transforming regulatory hurdles, technical challenges, and delivery goals into seamless reality."
+    },
+    story: {
+      heading: "How It All Began",
+      body1: "We began not with products, but with problems. Clients across MENA and Asia were overwhelmed by inconsistent documentation, unclear Incoterms, and delayed approvals. We listened, engineered, and built solutions that moved petroleum beyond borders, faster and smarter.",
+      body2: "Our strength lies in translating need into service — converting COA specs into multilingual formats, designing piping layouts for custom facilities, and aligning with real-time export protocols. With every deal, we ask: what’s the simplest path to precision?",
+      body3: "From our anchor offices in Ankara and Dubai, our team of engineers, consultants, and compliance experts collaborates to keep energy flowing smoothly across continents. We don't just deliver products — we deliver confidence, clarity, and continuity.",
+      quote: "Great service is not a slogan. It's a thousand correct steps taken when no one's watching — and each one matters."
+    },
+    footer: {
+      offices: "Our Offices",
+      services: "Services Offered",
+      certified: "Certified",
+      contact: "Get in Touch",
+      items: [
+        "Engineering & Setup",
+        "Documentation & SDS",
+        "Regulatory Compliance",
+        "Logistics Planning"
+      ],
+      bottom: "© 2025 RAHA PETROLKIMIA. Built for precision and care."
+    }
+  },
+  fa: {
+    intro: {
+      heading: "پیشرفت نفتی با قدرت و دقت",
+      body: "در رها پترول کیمیا، هر بشکه، هر سند، و هر تحویل فقط یک معامله نیست — بلکه تعهدی است. ما با دقت مهندسی و درک انسانی، تولیدکنندگان، تنظیم‌کنندگان و بازارهای جهانی را به هم متصل می‌کنیم. ما فقط ارائه‌دهنده لجستیک نیستیم؛ بلکه مفسر پیچیدگی‌ها هستیم، تبدیل‌کننده موانع مقرراتی و چالش‌های فنی به راه‌حل‌هایی آسان و قابل اجرا."
+    },
+    story: {
+      heading: "آغاز راه ما",
+      body1: "ما با محصول شروع نکردیم، بلکه با مشکل شروع کردیم. مشتریان در سراسر خاورمیانه و آسیا با اسناد ناسازگار، شرایط نامشخص حمل‌ونقل و تأییدیه‌های پرتاخیر مواجه بودند. ما گوش دادیم، طراحی کردیم و راه‌حل‌هایی ساختیم که نفت را فراتر از مرزها سریع‌تر و هوشمندتر جابه‌جا کند.",
+      body2: "قدرت ما در تبدیل نیاز به خدمت است — تبدیل مشخصات COA به فرمت‌های چندزبانه، طراحی خطوط لوله برای واحدهای خاص، و هماهنگی با پروتکل‌های صادراتی لحظه‌ای. با هر معامله، این سوال را می‌پرسیم: ساده‌ترین مسیر برای دقت چیست؟",
+      body3: "از دفاتر ما در آنکارا و دبی، تیمی متشکل از مهندسان، مشاوران و متخصصان انطباق، همکاری می‌کنند تا انرژی بدون مانع در سراسر قاره‌ها جریان یابد. ما فقط محصول تحویل نمی‌دهیم — بلکه اعتماد، شفافیت و پیوستگی را ارائه می‌دهیم.",
+      quote: "خدمات عالی شعار نیست. هزار قدم درست است که در سکوت برداشته می‌شود — و هرکدام از آنها اهمیت دارد."
+    },
+    footer: {
+      offices: "دفاتر ما",
+      services: "خدمات ارائه‌شده",
+      certified: "گواهی‌ها",
+      contact: "تماس با ما",
+      items: [
+        "مهندسی و راه‌اندازی",
+        "مدارک و SDS",
+        "انطباق مقررات",
+        "برنامه‌ریزی لجستیکی"
+      ],
+      bottom: "© ۲۰۲۵ رها پترول کیمیا. ساخته شده با دقت و توجه."
+    }
+  },
+  tr: {
+    intro: {
+      heading: "Petrolde Güvenli İlerleme",
+      body: "RAHA PETROLKIMIA’da her varil, her belge ve her teslimat bir işlemden çok daha fazlasıdır — bir taahhüttür. Yolculuğumuz; üreticileri, düzenleyicileri ve küresel pazarları mühendislik hassasiyeti ve insani özenle buluşturur. Sadece lojistik hizmeti değiliz; karmaşıklığı sadeleştiren, teknik zorlukları aşan ve hedef teslimatları gerçeğe dönüştüren çözüm ortağıyız."
+    },
+    story: {
+      heading: "Nasıl Başladık",
+      body1: "Ürünle değil, sorunla başladık. MENA ve Asya'daki müşteriler tutarsız belgeler, belirsiz teslim terimleri ve geciken onaylarla baş edemiyordu. Dinledik, mühendislik çözümleri sunduk ve petrolün sınır ötesi hareketini daha hızlı ve daha akıllı hale getirdik.",
+      body2: "Gücümüz ihtiyacı hizmete dönüştürmekte — COA belgelerini çok dilli biçimlere çevirmek, tesisler için borulama projeleri hazırlamak, ve anlık ihracat protokollerine uyum sağlamak. Her işte soruyoruz: hassasiyete giden en basit yol nedir?",
+      body3: "Ankara ve Dubai ofislerinden uzman mühendis, danışman ve uyum ekiplerimiz işbirliği içinde enerji akışını kesintisiz sürdürüyor. Biz sadece ürün değil — güven, netlik ve süreklilik sunuyoruz.",
+      quote: "İyi hizmet bir slogan değildir. Kimsenin görmediği anda bile atılan bin doğru adımdan oluşur — ve her biri önemlidir."
+    },
+    footer: {
+      offices: "Ofislerimiz",
+      services: "Sunulan Hizmetler",
+      certified: "Sertifikalar",
+      contact: "İletişim",
+      items: [
+        "Mühendislik & Kurulum",
+        "Belgeler & SDS",
+        "Yasal Uyum",
+        "Lojistik Planlama"
+      ],
+      bottom: "© 2025 RAHA PETROLKIMIA. Hassasiyet ve özenle inşa edilmiştir."
+    }
+  }
+};
+
+    function toggleTheme() {
+      const isLight = document.documentElement.classList.toggle("light-mode");
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+    }
+
+    function applyAboutTranslations(lang) {
+      const t = translations[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
+
+      document.querySelector(".intro-section h1").textContent = t.intro.heading;
+      document.querySelector(".intro-section p").textContent = t.intro.body;
+
+      document.querySelector(".story-text h2").textContent = t.story.heading;
+      const ps = document.querySelectorAll(".story-text p");
+      ps[0].textContent = t.story.body1;
+      ps[1].textContent = t.story.body2;
+      ps[2].textContent = t.story.body3;
+      document.querySelector(".story-extra blockquote").textContent = t.story.quote;
+
+      const f = t.footer;
+      const cols = document.querySelectorAll(".footer-column");
+      cols[0].querySelector("h4").textContent = f.offices;
+      cols[1].querySelector("h4").textContent = f.services;
+      const ul = cols[1].querySelector("ul");
+      ul.innerHTML = "";
+      f.items.forEach(txt => {
+        const li = document.createElement("li");
+        li.textContent = txt;
+        ul.appendChild(li);
+      });
+      cols[2].querySelector("h4").textContent = f.certified;
+      cols[3].querySelector("h4").textContent = f.contact;
+      document.getElementById("footer-final-note").textContent = f.bottom;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const lang = localStorage.getItem("language") || "en";
+      document.getElementById("language-switcher").value = lang;
+      applyAboutTranslations(lang);
+      document.getElementById("language-switcher").addEventListener("change", e => {
+        const selectedLang = e.target.value;
+        localStorage.setItem("language", selectedLang);
+        applyAboutTranslations(selectedLang);
+      });
+    });
+  </script>
+</body>
+</html>

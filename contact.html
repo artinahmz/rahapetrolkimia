@@ -1,0 +1,484 @@
+<!-- Paste this entire code into contact.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact – RAHA PETROLKIMIA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.add('light-mode');
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #121212;
+      --text: #f1f1f1;
+      --card: #1f1f1f;
+      --accent: #ff9900;
+      --border: #cc5c00;
+      --dim: #999;
+    }
+    .light-mode {
+      --bg: #ffffff;
+      --text: #2c2c2c;
+      --card: #fff3f0;
+      --accent: #d93425;
+      --border: #bf2c1a;
+      --dim: #777;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    footer.super-footer {
+      margin-top: auto;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    header {
+      background: var(--card);
+      padding: 25.5px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(255,165,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo-section { display: flex; align-items: center; vertical-align: middle; }
+    .logo-section img { height: 40px; margin-right: 12px; }
+    .company-title { font-size: 1.8em; font-weight: bold; color: var(--accent); line-height: 1; }
+    nav { display: flex; gap: 18px; }
+    nav a {
+      position: relative;
+      font-weight: 500;
+      padding-bottom: 4px;
+      transition: color 0.3s ease;
+    }
+    nav a:hover, nav a.active { color: var(--accent); }
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after, nav a.active::after { width: 100%; }
+    #language-switcher, .toggle-button {
+      position: fixed;
+      right: 20px;
+      z-index: 999;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 20px 40px;
+      background: linear-gradient(45deg, var(--card), var(--bg));
+    }
+    .hero h1 {
+      font-size: 3em;
+      background: linear-gradient(to right, var(--accent), var(--border));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 18px;
+    }
+    .hero p {
+      font-size: 1.2em;
+      max-width: 720px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    .section {
+      padding: 60px 20px 0;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+    .section h2 {
+      font-size: 2em;
+      margin-bottom: 18px;
+      background: linear-gradient(to right, var(--accent), var(--border));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .section p {
+      font-size: 1.05em;
+      color: var(--dim);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .contact-form {
+      max-width: 700px;
+      margin: auto;
+      background: var(--card);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    }
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group label {
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+    .form-group input,
+    .form-group textarea {
+      border: none;
+      border-bottom: 2px solid var(--border);
+      background: transparent;
+      padding: 12px 8px;
+      font-size: 1em;
+      color: var(--text);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .full-width {
+      grid-column: span 2;
+    }
+    .form-actions {
+      text-align: center;
+    }
+    #submit-btn {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 14px 36px;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .footer-column ul li::before {
+      content: "➤ ";
+      color: var(--accent);
+    }
+    footer.super-footer {
+      background: var(--card);
+      padding: 60px 30px;
+      border-top: 2px solid var(--accent);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: auto;
+      color: var(--text);
+    }
+    .footer-column h4 { font-size: 1.2em; color: var(--accent); margin-bottom: 16px; }
+    .cert-pill {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin: 4px 10px 4px 0;
+      font-weight: bold;
+      font-size: 0.9em;
+    }
+    .social-icons { display: flex; gap: 12px; margin-top: 10px; }
+    .social-icons img {
+      height: 24px;
+      filter: grayscale(1);
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+    .social-icons img:hover {
+      filter: none;
+      transform: scale(1.2);
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.85em;
+      color: var(--dim);
+    }
+
+    #language-switcher, .toggle-button {
+      position: fixed;
+      right: 20px;
+      z-index: 999;
+      font-weight: bold;
+      border-radius: 6px;
+    }
+    #language-switcher {
+      bottom: 70px;
+      padding: 8px;
+      background: var(--card);
+      border: 1px solid var(--accent);
+      color: var(--text);
+    }
+    .toggle-button {
+      bottom: 20px;
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 10px 16px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 700px) {
+      .form-row { grid-template-columns: 1fr; }
+      .full-width { grid-column: span 1; }
+    }
+    header {
+      direction: ltr;
+    }
+
+    .connect-heading {
+      background: none; /* Removes any background */
+      background-color: transparent; /* Makes sure it's fully clear */
+      -webkit-background-clip: initial;
+      background-clip: initial;
+      color: var(--accent); /* Or set to your preferred heading color */
+    }
+  </style>
+</head>
+<body>
+  <select id="language-switcher">
+    <option value="en">English</option>
+    <option value="fa">فارسی</option>
+    <option value="tr">Türkçe</option>
+  </select>
+  <button class="toggle-button" onclick="toggleTheme()">Toggle Theme</button>
+
+  <header>
+    <div class="logo-section">
+      <img src="assets/LOGO.png" alt="RAHA Logo" />
+      <h1 class="company-title">RAHA PETROLKIMIA</h1>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </header>
+
+    <section class="hero">
+    <h1 id="contact-hero-title"></h1>
+    <p id="contact-hero-sub"></p>
+  </section>
+
+  <section class="section">
+    <h2 id="contact-form-heading"></h2>
+    <p id="contact-form-text"></p>
+  </section>
+
+  <div class="contact-form">
+    <form id="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name" id="lbl-name"></label>
+          <input type="text" id="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email" id="lbl-email"></label>
+          <input type="email" id="email" required />
+        </div>
+      </div>
+      <div class="form-group full-width">
+        <label for="message" id="lbl-message"></label>
+        <textarea id="message" rows="6" required></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="submit" id="submit-btn"></button>
+      </div>
+    </form>
+  </div>
+
+  <section class="section">
+    <h2 id="contact-office-heading"></h2>
+    <p id="contact-office-text"></p>
+  </section>
+
+  <footer class="super-footer">
+    <div class="footer-grid">
+      <div class="footer-column">
+        <h4 id="footer-location-title"></h4>
+        <p>🇹🇷 <strong>Ankara HQ:</strong> Altinoran Complex, Tower 3</p>
+        <p>🇦🇪 <strong>Dubai Regional:</strong> Burlington Tower, Business Bay</p>
+      </div>
+      <div class="footer-column">
+        <h4 id="footer-services-title"></h4>
+        <ul id="footer-services-list"></ul>
+      </div>
+      <div class="footer-column">
+        <h4 id="footer-cert-title"></h4>
+        <span class="cert-pill">ISO 9001</span>
+        <span class="cert-pill">SGS Certified</span>
+      </div>
+      <div class="footer-column">
+        <h4 id="footer-contact-title"></h4>
+        <p><a href="mailto:info@rahapetrolkimia.com">info@rahapetrolkimia.com</a></p>
+        <p><span></span> <span dir="ltr">+90 552 693 15 10</span></p>
+        <div class="social-icons">
+          <a href="#"><img src="assets/linkedin.svg" alt="LinkedIn" /></a>
+          <a href="#"><img src="assets/twitter.svg" alt="Twitter" /></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p id="footer-final-note"></p>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        contactHeroTitle: "Connect with RAHA PETROLKIMIA",
+        contactHeroSub: "We're here to help you with trade inquiries, technical consultations, and partnership requests.",
+        contactFormHeading: "Send Us a Message",
+        contactFormText: "Let us know what you're looking for. We'll get back to you swiftly.",
+        lblName: "Your Name",
+        lblEmail: "Email Address",
+        lblMessage: "Your Message",
+        submitBtn: "Send Message",
+        contactOfficeHeading: "Where to Find Us",
+        contactOfficeText: "Our teams operate out of Turkey and UAE, with partners worldwide. Reach out via email or phone for direct assistance.",
+        footerLocationTitle: "Our Offices",
+        footerServicesTitle: "Services Offered",
+        footerServicesList: ["Engineering & Setup", "Documentation & SDS", "Regulatory Compliance", "Logistics Planning"],
+        footerCertTitle: "Certified",
+        footerContactTitle: "Get in Touch",
+        footerFinalNote: "© 2025 RAHA PETROLKIMIA. Trusted Petroleum Supply & Strategy."
+      },
+      fa: {
+        contactHeroTitle: "ارتباط با رها پترول کیمیا",
+        contactHeroSub: "ما آماده پاسخگویی به درخواست‌های بازرگانی، مشاوره فنی و همکاری‌های شما هستیم.",
+        contactFormHeading: "پیام خود را ارسال کنید",
+        contactFormText: "به ما اطلاع دهید که چه چیزی مد نظر دارید. ما سریعاً با شما تماس می‌گیریم.",
+        lblName: "نام شما",
+        lblEmail: "آدرس ایمیل",
+        lblMessage: "پیام شما",
+        submitBtn: "ارسال پیام",
+        contactOfficeHeading: "مکان‌های حضور ما",
+        contactOfficeText: "تیم‌های ما در ترکیه و امارات فعالیت دارند و با شرکای جهانی همکاری می‌کنند.",
+        footerLocationTitle: "دفاتر ما",
+        footerServicesTitle: "خدمات ارائه شده",
+        footerServicesList: ["مهندسی و نصب", "مدارک و SDS", "انطباق قانونی", "برنامه‌ریزی لجستیک"],
+        footerCertTitle: "تأیید شده",
+        footerContactTitle: "تماس با ما",
+        footerFinalNote: "© ۲۰۲۵ رها پترول کیمیا. تأمین مطمئن نفت و استراتژی قابل اعتماد."
+      },
+      tr: {
+        contactHeroTitle: "RAHA PETROLKIMIA ile Bağlantı Kurun",
+        contactHeroSub: "Ticaret talepleri, teknik danışmanlık ve ortaklık konularında size yardımcı olmak için buradayız.",
+        contactFormHeading: "Bize Mesaj Gönderin",
+        contactFormText: "Ne aradığınızı bize bildirin. Hızla sizinle iletişime geçeceğiz.",
+        lblName: "Adınız",
+        lblEmail: "E-posta Adresiniz",
+        lblMessage: "Mesajınız",
+        submitBtn: "Mesaj Gönder",
+        contactOfficeHeading: "Bizi Nerede Bulabilirsiniz?",
+        contactOfficeText: "Ekiplerimiz Türkiye ve BAE'de faaliyet göstermektedir ve dünya genelinde ortaklarla çalışmaktadır.",
+        footerLocationTitle: "Ofislerimiz",
+        footerServicesTitle: "Sunulan Hizmetler",
+        footerServicesList: ["Mühendislik ve Kurulum", "Belgeler ve SDS", "Yasal Uyum", "Lojistik Planlama"],
+        footerCertTitle: "Sertifikalı",
+        footerContactTitle: "İletişime Geçin",
+        footerFinalNote: "© 2025 RAHA PETROLKIMIA. Güvenilir Petrol Tedariki ve Strateji."
+      }
+    };
+
+    function toggleTheme() {
+      const isLight = document.documentElement.classList.toggle('light-mode');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    }
+
+    function applyTranslations(lang) {
+      const t = translations[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
+
+      document.getElementById("contact-hero-title").textContent = t.contactHeroTitle;
+      document.getElementById("contact-hero-sub").textContent = t.contactHeroSub;
+      document.getElementById("contact-form-heading").textContent = t.contactFormHeading;
+      document.getElementById("contact-form-text").textContent = t.contactFormText;
+      document.getElementById("lbl-name").textContent = t.lblName;
+      document.getElementById("lbl-email").textContent = t.lblEmail;
+      document.getElementById("lbl-message").textContent = t.lblMessage;
+      document.getElementById("submit-btn").textContent = t.submitBtn;
+      document.getElementById("contact-office-heading").textContent = t.contactOfficeHeading;
+      document.getElementById("contact-office-text").textContent = t.contactOfficeText;
+      document.getElementById("footer-location-title").textContent = t.footerLocationTitle;
+      document.getElementById("footer-services-title").textContent = t.footerServicesTitle;
+      document.getElementById("footer-cert-title").textContent = t.footerCertTitle;
+      document.getElementById("footer-contact-title").textContent = t.footerContactTitle;
+      document.getElementById("footer-final-note").textContent = t.footerFinalNote;
+
+      const list = document.getElementById("footer-services-list");
+      list.innerHTML = "";
+      t.footerServicesList.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        list.appendChild(li);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const lang = localStorage.getItem("language") || "en";
+      document.getElementById("language-switcher").value = lang;
+      applyTranslations(lang);
+      document.getElementById("language-switcher").addEventListener("change", e => {
+        const newLang = e.target.value;
+        localStorage.setItem("language", newLang);
+        applyTranslations(newLang);
+      });
+
+      document.getElementById("contact-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const name = document.getElementById("name").value;
+        alert(`${translations[document.getElementById("language-switcher").value].contactHeroSub}\n\nThank you, ${name}!`);
+    });
+  });
+  </script>
+</body>
+</html>
